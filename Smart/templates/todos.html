@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <!-- Header with orange background and black border -->
+        <div class="card-header text-white" style="background-color: orange; border-bottom: 2px solid black !important;">
+            <h2 class="mb-0">My Todo List</h2>
+        </div>
+        
+        <div class="card-body">
+            <!-- Add new todo form -->
+            <form method="post" class="mb-4">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        name="title" 
+                        class="form-control bg-light text-dark" 
+                        placeholder="Enter new task"
+                        required
+                        style="border: 1px solid #ced4da;"
+                    >
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-plus-lg"></i> Add Task
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Todo list -->
+            <ul class="list-group">
+                {% for todo in todos %}
+                <li class="list-group-item d-flex justify-content-between align-items-center {% if todo.completed %}list-group-item-light{% endif %}" style="background-color: #f8f9fa;">
+                    <div class="d-flex align-items-center">
+                        <!-- Toggle complete form -->
+                        <form action="{% url 'toggle_todo' todo.id %}" method="post" class="me-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm {% if todo.completed %}btn-outline-success{% else %}btn-outline-primary{% endif %}">
+                                <i class="bi {% if todo.completed %}bi-check-square{% else %}bi-square{% endif %}"></i>
+                            </button>
+                        </form>
+                        
+                        <span class="{% if todo.completed %}text-decoration-line-through text-muted{% else %}text-dark{% endif %}">
+                            {{ todo.title }}
+                        </span>
+                    </div>
+                    
+                    <div class="d-flex align-items-center">
+                        <small class="text-muted me-2">{{ todo.created_at|date:"M d, Y" }}</small>
+                        
+                        <!-- Delete button -->
+                        <form action="{% url 'delete_todo' todo.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="list-group-item text-center text-muted py-4">
+                    <i class="bi bi-check-all fs-1"></i>
+                    <p class="mt-2 mb-0">No tasks yet. Add one above!</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Card header styling */
+    .card-header {
+        background-color: orange !important;
+        border-bottom: 2px solid black !important;
+    }
+    
+    /* Other existing styles */
+    .form-control {
+        background-color: #f8f9fa !important;
+        color: #212529 !important;
+        border: 1px solid #ced4da !important;
+    }
+    
+    .form-control:focus {
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .list-group-item {
+        background-color: #f8f9fa;
+        color: #212529;
+        border-color: #e9ecef;
+    }
+    
+    .list-group-item-light {
+        background-color: #f8f9fa;
+    }
+    
+    .text-decoration-line-through {
+        color: #6c757d !important;
+    }
+</style>
+{% endblock %}

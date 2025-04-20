@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}  <!-- Load the static template tag -->
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+<p>Home Page</p>
+<h1>{{ welcome_message }}</h1>
+Welcome to the S.A.F.E!
+
+<!-- Add the image -->
+<img src="{% static 'images/logo.png' %}" alt="Logo">
+{% endblock %}

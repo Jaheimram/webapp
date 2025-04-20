@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} - S.A.F.E. HardHat{% endblock %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>By {{ post.author }} on {{ post.created_at }}</p>
+<p>{{ post.content }}</p>
+<a href="{% url 'post_list' %}">Back to Posts</a>
+{% endblock %}

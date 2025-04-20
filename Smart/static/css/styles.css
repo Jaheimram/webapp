@@ -1,0 +1,77 @@
+/* General Styles */
+body {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: darkorange !important; /* Dark orange navbar */
+    border-bottom: 2px solid grey; /* Grey border */
+}
+
+.navbar-brand, .nav-link {
+    color: white !important; /* White text for navbar links */
+}
+
+.nav-link:hover {
+    color: black !important; /* Black text on hover */
+}
+
+.navbar-toggler {
+    border-color: white !important; /* White border for toggler */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important; /* White toggler icon */
+}
+
+/* Container Styles */
+.container {
+    background-color: black; /* Black background for content */
+    color: white; /* White text */
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid grey; /* Grey border */
+    border-radius: 5px;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: darkorange; /* Dark orange buttons */
+    border-color: darkorange; /* Dark orange border */
+    color: white; /* White text */
+}
+
+.btn-primary:hover {
+    background-color: #ff8c00; /* Slightly lighter orange on hover */
+    border-color: #ff8c00; /* Slightly lighter orange border */
+}
+
+/* Form Styles */
+.form-control {
+    background-color: grey; /* Grey input fields */
+    color: white; /* White text */
+    border: 1px solid darkorange; /* Dark orange border */
+}
+
+.form-control:focus {
+    background-color: grey; /* Grey background on focus */
+    color: white; /* White text */
+    border-color: white; /* White border on focus */
+    box-shadow: none; /* Remove Bootstrap's default box shadow */
+}
+
+/* Footer Styles */
+footer {
+    background-color: grey; /* Grey footer */
+    color: white; /* White text */
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

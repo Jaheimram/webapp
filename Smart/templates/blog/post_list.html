@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Posts - S.A.F.E. HardHat{% endblock %}
+
+{% block content %}
+<h1>Posts</h1>
+<ul>
+    {% for post in posts %}
+        <li>
+            <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+            <p>By {{ post.author }} on {{ post.created_at }}</p>
+            <p>{{ post.content|truncatewords:30 }}</p>  <!-- Display a preview of the content -->
+        </li>
+    {% empty %}
+        <li>No posts available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

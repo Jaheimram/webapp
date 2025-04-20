@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Case Studies</h1>
+    
+    <div class="mb-4">
+        <h3>Download Complete Packages</h3>
+        {% for zip in zip_files %}
+        <a href="{{ zip.zip_file.url }}" class="btn btn-primary mb-2">
+            Download {{ zip.title }} (ZIP)
+        </a>
+        {% endfor %}
+    </div>
+    
+    <h3>Individual PDFs</h3>
+    <div class="list-group">
+        {% for pdf in pdf_files %}
+        <a href="{% url 'case_study_detail' pdf.zip_id pdf.name %}" 
+           class="list-group-item list-group-item-action">
+            {{ pdf.name }}
+        </a>
+        {% empty %}
+        <div class="alert alert-info">No case studies available yet.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

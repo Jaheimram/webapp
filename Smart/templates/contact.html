@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Contact Information</h2>
+            <p class="text-secondary">Email: safeinquiries2025@gmail.com</p>
+            <p class="text-secondary">Phone: (123) 456-7890</p>
+            <address class="text-secondary">
+                123 Company St<br>
+                City, State 12345
+            </address>
+        </div>
+        
+        <div class="col-md-6 text-white">  <!-- Added text-white class here -->
+            <h2 class="text-white">Send Us a Message</h2>  <!-- Changed to white -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control bg-dark text-white" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control bg-dark text-white" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control bg-dark text-white" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Rest of your template remains unchanged -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Meet Our Team</h2>
+        </div>
+        
+        {% for member in team_members %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <img src="{{ member.photo.url }}" class="card-img-top team-member-img" alt="{{ member.name }}">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-1 text-secondary">{{ member.name }}</h5>
+                    <p class="text-muted small mb-3">{{ member.position }}</p>
+                    <p class="card-text text-secondary">{{ member.bio|truncatewords:20 }}</p>
+                    <div class="d-flex justify-content-center">
+                        {% if member.email %}
+                        <a href="mailto:{{ member.email }}" class="btn btn-sm btn-outline-secondary mx-1">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Updated styles for white text section */
+    .text-white .form-control {
+        color: white !important;
+    }
+    .text-white .form-control::placeholder {
+        color: rgba(255,255,255,0.7) !important;
+    }
+    
+    /* Existing styles */
+    .team-member-img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 0;
+    }
+    .card {
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
